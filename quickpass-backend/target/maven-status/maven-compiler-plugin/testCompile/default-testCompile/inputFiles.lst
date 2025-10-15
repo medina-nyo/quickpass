@@ -1,0 +1,17 @@
+/Users/medinaoukaci/development/quickpass/quickpass-backend/src/test/java/com/quickpass/integration/signup/BoulangerSignupControllerTest.java
+/Users/medinaoukaci/development/quickpass/quickpass-backend/src/test/java/com/quickpass/unit/stripe/StripeAccountServiceTest.java
+/Users/medinaoukaci/development/quickpass/quickpass-backend/src/test/java/com/quickpass/unit/signup/SignupServiceTest.java
+/Users/medinaoukaci/development/quickpass/quickpass-backend/src/test/java/com/quickpass/integration/sms/ActivationSmsRepositoryTest.java
+/Users/medinaoukaci/development/quickpass/quickpass-backend/src/test/java/com/quickpass/integration/error/GlobalExceptionHandlerTest.java
+/Users/medinaoukaci/development/quickpass/quickpass-backend/src/test/java/com/quickpass/unit/sms/ActivationServiceTest.java
+/Users/medinaoukaci/development/quickpass/quickpass-backend/src/test/java/com/quickpass/integration/sms/ActivationFlowIntegrationTest.java
+/Users/medinaoukaci/development/quickpass/quickpass-backend/src/test/java/com/quickpass/unit/policy/SignupSessionCleanupSchedulerTest.java
+/Users/medinaoukaci/development/quickpass/quickpass-backend/src/test/java/com/quickpass/config/TestJpaConfig.java
+/Users/medinaoukaci/development/quickpass/quickpass-backend/src/test/java/com/quickpass/unit/common/security/PasswordPolicyTest.java
+/Users/medinaoukaci/development/quickpass/quickpass-backend/src/test/java/com/quickpass/unit/core/policy/AuditLogServiceTest.java
+/Users/medinaoukaci/development/quickpass/quickpass-backend/src/test/java/com/quickpass/unit/sms/ActivationServiceRateLimitTest.java
+/Users/medinaoukaci/development/quickpass/quickpass-backend/src/test/java/com/quickpass/unit/error/ErrorCatalogTest.java
+/Users/medinaoukaci/development/quickpass/quickpass-backend/src/test/java/com/quickpass/integration/SignupProfileBoulangerValidationTest.java
+/Users/medinaoukaci/development/quickpass/quickpass-backend/src/test/java/com/quickpass/integration/signup/SignupSessionRepositoryTest.java
+/Users/medinaoukaci/development/quickpass/quickpass-backend/src/test/java/com/quickpass/integration/sms/ActivationControllerTest.java
+/Users/medinaoukaci/development/quickpass/quickpass-backend/src/test/java/com/quickpass/unit/sms/MockSmsProviderTest.java

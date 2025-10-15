@@ -1,0 +1,163 @@
+{
+  "info": {
+    "_postman_id": "4b8f86e7-b729-4f54-bb85-quickpass",
+    "name": "QuickPass - Parcours d’inscription Boulanger",
+    "description": "Tests complets du parcours d’inscription Boulanger (8 étapes) alignés avec le backend QuickPass.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1️⃣ Start Session",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"boulangerie.test@quickpass.com\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/signup/start",
+          "host": ["{{baseUrl}}"],
+          "path": ["signup", "start"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "2️⃣ Email Code",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"emailCode\": \"123456\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/signup/1/email-code",
+          "host": ["{{baseUrl}}"],
+          "path": ["signup", "1", "email-code"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "3️⃣ Profil Boulanger",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"prenom\": \"Jean\",\n  \"nom\": \"Dupont\",\n  \"telephonePersonnel\": \"+33601020304\",\n  \"raisonSociale\": \"Boulangerie Dupont\",\n  \"siret\": \"12345678900017\",\n  \"telephoneCommerce\": \"+33102030405\",\n  \"modeVente\": \"EN_LIGNE\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/signup/1/profile",
+          "host": ["{{baseUrl}}"],
+          "path": ["signup", "1", "profile"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "4️⃣ Code SMS",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"smsCode\": \"654321\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/signup/1/sms-code",
+          "host": ["{{baseUrl}}"],
+          "path": ["signup", "1", "sms-code"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "5️⃣ Adresse & Mode Vente",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"adresse\": \"12 Rue de la Boulangerie\",\n  \"ville\": \"Paris\",\n  \"codePostal\": \"75001\",\n  \"modeVente\": \"EN_LIGNE\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/signup/1/adresse",
+          "host": ["{{baseUrl}}"],
+          "path": ["signup", "1", "adresse"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "6️⃣ Stripe",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"stripeAccountId\": \"acct_test_12345\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/signup/1/stripe",
+          "host": ["{{baseUrl}}"],
+          "path": ["signup", "1", "stripe"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "7️⃣ Mot de passe",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"motDePasse\": \"MonSuperMotDePasse123!\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/signup/1/password",
+          "host": ["{{baseUrl}}"],
+          "path": ["signup", "1", "password"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "8️⃣ Consentements",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"accepteCgu\": true,\n  \"accepteRgpd\": true,\n  \"accepteStripe\": true\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/signup/1/consents",
+          "host": ["{{baseUrl}}"],
+          "path": ["signup", "1", "consents"]
+        }
+      },
+      "response": []
+    }
+  ]
+}
+
