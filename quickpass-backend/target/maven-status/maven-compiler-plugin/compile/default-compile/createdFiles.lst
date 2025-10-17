@@ -10,6 +10,7 @@ com/quickpass/common/validation/RegexPatterns.class
 com/quickpass/common/util/DateUtils.class
 com/quickpass/sms/domain/model/ActivationSms$ActivationSmsBuilder.class
 com/quickpass/common/validation/ValidationGroups.class
+com/quickpass/account/domain/repo/CompteRepository.class
 com/quickpass/account/domain/service/impl/PreferenceServiceImpl.class
 com/quickpass/sms/provider/MockSmsProvider.class
 com/quickpass/core/policy/domain/model/AuditLog$AuditLogBuilder.class

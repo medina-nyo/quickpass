@@ -14,6 +14,14 @@ import java.time.LocalDateTime;
 @Repository
 public interface SignupSessionRepository extends JpaRepository<SignupSession, Long> {
 
+    /**
+     * Vérifie si une session d'inscription non complétée existe déjà pour l'e-mail donné.
+     *
+     * @param email l'e-mail à vérifier.
+     * @return true si une session active existe, false sinon.
+     */
+    boolean existsByEmailAndCompletedIsFalse(String email);
+
     @Modifying
     @Query("DELETE FROM SignupSession s WHERE s.expiresAt < :cutoff")
     int deleteExpiredSessions(@Param("cutoff") LocalDateTime cutoff);

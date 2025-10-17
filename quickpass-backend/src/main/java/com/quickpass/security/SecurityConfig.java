@@ -85,8 +85,9 @@ public class SecurityConfig {
         int hashLength = 32;
         int parallelism = 1;
         int memory = 65536;
-        int iterations = 3;     
+        int iterations = 3;
 
         return new Argon2PasswordEncoder(saltLength, hashLength, parallelism, memory, iterations);
     }
 }
+

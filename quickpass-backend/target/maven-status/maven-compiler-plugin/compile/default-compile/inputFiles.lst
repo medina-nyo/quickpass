@@ -49,6 +49,7 @@
 /Users/medinaoukaci/development/quickpass/quickpass-backend/src/main/java/com/quickpass/sms/domain/package-info.java
 /Users/medinaoukaci/development/quickpass/quickpass-backend/src/main/java/com/quickpass/core/policy/metrics/MonitoringMetrics.java
 /Users/medinaoukaci/development/quickpass/quickpass-backend/src/main/java/com/quickpass/common/constants/StatutConfigurationPaiement.java
+/Users/medinaoukaci/development/quickpass/quickpass-backend/src/main/java/com/quickpass/account/domain/repo/CompteRepository.java
 /Users/medinaoukaci/development/quickpass/quickpass-backend/src/main/java/com/quickpass/sms/domain/model/ActivationSms.java
 /Users/medinaoukaci/development/quickpass/quickpass-backend/src/main/java/com/quickpass/sms/api/controller/ActivationController.java
 /Users/medinaoukaci/development/quickpass/quickpass-backend/src/main/java/com/quickpass/account/package-info.java

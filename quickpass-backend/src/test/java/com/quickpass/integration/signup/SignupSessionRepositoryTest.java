@@ -37,6 +37,7 @@ class SignupSessionRepositoryTest {
     @BeforeEach
     void setUp() {
         validSession = SignupSession.builder()
+                .email("valid@quickpass.fr") // CHAMP AJOUTÉ
                 .compteId(1L)
                 .signupType(SignupType.BOULANGER)
                 .currentStep(SignupStepBoulanger.EMAIL)
@@ -47,6 +48,7 @@ class SignupSessionRepositoryTest {
                 .build();
 
         expiredSession = SignupSession.builder()
+                .email("expired@quickpass.fr") // CHAMP AJOUTÉ
                 .compteId(2L)
                 .signupType(SignupType.BOULANGER)
                 .currentStep(SignupStepBoulanger.EMAIL)
@@ -79,6 +81,7 @@ class SignupSessionRepositoryTest {
         signupSessionRepository.deleteAll();
 
         SignupSession freshSession = SignupSession.builder()
+                .email("fresh@quickpass.fr") // CHAMP AJOUTÉ
                 .compteId(3L)
                 .signupType(SignupType.BOULANGER)
                 .currentStep(SignupStepBoulanger.EMAIL)

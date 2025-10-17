@@ -27,6 +27,10 @@ public class SignupSession {
     @Setter(AccessLevel.NONE)
     private Long id;
 
+    /** L'adresse e-mail utilisée pour l'inscription. */
+    @Column(nullable = false)
+    private String email;
+
     /** Identifiant du compte lié à cette session (peut être temporaire). */
     @Column(name = "compte_id")
     private Long compteId;

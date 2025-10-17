@@ -1,6 +1,8 @@
 package com.quickpass.unit.signup;
 
+import com.quickpass.account.domain.repo.CompteRepository;
 import com.quickpass.account.domain.service.PreferenceService;
+import com.quickpass.error.exception.BusinessException;
 import com.quickpass.signup.domain.boulanger.constants.SignupStepBoulanger;
 import com.quickpass.signup.domain.constants.SignupType;
 import com.quickpass.signup.domain.model.SignupSession;
@@ -22,7 +24,11 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Test unitaire du service d'inscription (SignupServiceImpl).
@@ -34,6 +40,9 @@ class SignupServiceTest {
 
     @Mock
     private SignupSessionRepository signupSessionRepository;
+
+    @Mock
+    private CompteRepository compteRepository; // AJOUT : Mock du repository de comptes
 
     @Mock
     private PreferenceService preferenceService;
@@ -49,6 +58,7 @@ class SignupServiceTest {
 
         session = SignupSession.builder()
                 .id(1L)
+                .email("test@quickpass.fr") // AJOUT OBLIGATOIRE
                 .compteId(1L)
                 .signupType(SignupType.BOULANGER)
                 .currentStep(SignupStepBoulanger.EMAIL)
@@ -89,8 +99,10 @@ class SignupServiceTest {
     }
 
     @Test
-    @DisplayName("Doit créer une session lors du start()")
+    @DisplayName("Doit créer une session lors du start() si l'email est neuf")
     void shouldCreateSignupSession() {
+        when(compteRepository.existsByEmail(anyString())).thenReturn(false);
+        when(signupSessionRepository.existsByEmailAndCompletedIsFalse(anyString())).thenReturn(false);
         when(signupSessionRepository.save(any(SignupSession.class)))
                 .thenAnswer(inv -> inv.getArgument(0));
 
@@ -100,8 +112,43 @@ class SignupServiceTest {
         assertThat(newSession.getExpiresAt()).isAfter(LocalDateTime.now());
         assertThat(newSession.isCompleted()).isFalse();
         assertThat(newSession.getSignupType()).isEqualTo(SignupType.BOULANGER);
+        assertThat(newSession.getEmail()).isEqualTo("contact@boulangerie.fr");
 
+        verify(compteRepository).existsByEmail("contact@boulangerie.fr");
+        verify(signupSessionRepository).existsByEmailAndCompletedIsFalse("contact@boulangerie.fr");
         verify(preferenceService, never()).initDefaults(any());
+    }
+
+    @Test
+    @DisplayName("Doit lever une BusinessException si l'email est déjà utilisé dans les comptes")
+    void shouldThrowExceptionIfEmailExistsInCompte() {
+        String existingEmail = "used@compte.fr";
+        when(compteRepository.existsByEmail(existingEmail)).thenReturn(true);
+
+        assertThatThrownBy(() ->
+                signupService.start(existingEmail, SignupType.BOULANGER)
+        ).isInstanceOf(BusinessException.class)
+                .hasMessageContaining("SIGNUP_EMAIL_EXISTS");
+
+        verify(signupSessionRepository, never()).existsByEmailAndCompletedIsFalse(anyString());
+        verify(signupSessionRepository, never()).save(any());
+    }
+
+    @Test
+    @DisplayName("Doit lever une BusinessException si l'email est déjà utilisé dans une session active")
+    void shouldThrowExceptionIfEmailExistsInActiveSession() {
+        String existingEmail = "used@session.fr";
+        when(compteRepository.existsByEmail(existingEmail)).thenReturn(false);
+        when(signupSessionRepository.existsByEmailAndCompletedIsFalse(existingEmail)).thenReturn(true);
+
+        assertThatThrownBy(() ->
+                signupService.start(existingEmail, SignupType.BOULANGER)
+        ).isInstanceOf(BusinessException.class)
+                .hasMessageContaining("SIGNUP_EMAIL_EXISTS");
+
+        verify(compteRepository, times(1)).existsByEmail(existingEmail);
+        verify(signupSessionRepository, times(1)).existsByEmailAndCompletedIsFalse(existingEmail);
+        verify(signupSessionRepository, never()).save(any());
     }
 
     @Test
